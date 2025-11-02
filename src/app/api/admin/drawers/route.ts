@@ -8,7 +8,10 @@ export async function GET() {
   try {
     const drawers = await Drawer.find({}).sort({ createdAt: -1 });
     return NextResponse.json({ success: true, data: drawers });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ success: false, error: 'An unknown error occurred' }, { status: 400 });
   }
 }

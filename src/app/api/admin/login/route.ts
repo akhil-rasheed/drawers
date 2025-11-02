@@ -11,8 +11,6 @@ export async function POST(request: Request) {
       throw new Error('ADMIN_PASSWORD_HASH is not set');
     }
 
-    console.log('Password:', password);
-    console.log('Hash:', hash);
     const match = await bcrypt.compare(password, hash);
 
     if (match) {
@@ -21,7 +19,10 @@ export async function POST(request: Request) {
     } else {
       return NextResponse.json({ success: false, error: 'Invalid password' }, { status: 401 });
     }
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ success: false, error: 'An unknown error occurred' }, { status: 400 });
   }
 }

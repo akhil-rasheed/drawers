@@ -1,5 +1,12 @@
 
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
+
+declare global {
+  var mongoose: {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+  };
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -25,8 +32,8 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
+    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongooseInstance: Mongoose) => {
+      return mongooseInstance;
     });
   }
   cached.conn = await cached.promise;

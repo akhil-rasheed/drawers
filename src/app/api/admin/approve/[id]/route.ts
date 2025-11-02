@@ -16,7 +16,10 @@ export async function PATCH(request: Request, context: any) {
       return NextResponse.json({ success: false, error: 'Drawer not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true, data: drawer });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ success: false, error: 'An unknown error occurred' }, { status: 400 });
   }
 }
