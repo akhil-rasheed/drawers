@@ -66,6 +66,9 @@ export default async function Home() {
           <Link href="/new" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105">
             Create your drawer
           </Link>
+          <Link href="/admin" className="ml-4 bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105">
+            Approve Drawers
+          </Link>
         </div>
       </div>
     </div>

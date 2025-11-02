@@ -19,13 +19,13 @@ export default async function DrawerPage({ params }: any) {
       <Link href="/" className="inline-block mb-8 text-blue-500 hover:text-blue-700 font-semibold">
         &larr; Back to all drawers
       </Link>
-      <div className="bg-gray-700 rounded-lg shadow-lg p-8">
+      <div className="text-gray-800 rounded-lg shadow-lg p-8">
         <div className="prose prose-invert lg:prose-xl">
           <ReactMarkdown>{drawer.content}</ReactMarkdown>
         </div>
         <div className="mt-8">
           {drawer.images && drawer.images.map((image: string, index: number) => (
-            <img key={index} src={image} alt={`Drawer image ${index + 1}`} className="max-w-full h-auto rounded-lg mt-4 shadow-md" />
+            <img key={index} src={image} alt={`Drawer image ${index + 1}`} className="max-w-full h-auto rounded-lg mt-4 " />
           ))}
         </div>
       </div>
